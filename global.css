@@ -1,4 +1,3 @@
-/* Sprite Lab starter: the page is set up. Write your code under each YOUR CODE comment. */
 
 /* Colors and spacing are set for you. You do not need to change them. */
 :root {
@@ -12,6 +11,103 @@
   --space-small: 0.5rem;
   --space: 1rem;
   --space-big: 2rem;
+}
+
+@keyframes spin{
+  from{
+    transform: translateX(0%);
+  }
+
+  to{
+    transform: translateX(-100%);
+  }
+}
+
+@keyframes walk-down{
+  from{
+    transform: translate(0, 0);
+  }
+
+  to{
+    transform: translate(-100%, 0);
+  }
+}
+
+.walk-down:hover img,
+.walk-down:focus-visible img {
+  animation: 0.5s steps(8) infinite walk-down;
+}
+
+.walk-down:active img {
+  animation: 0.3s steps(8) infinite walk-down;
+}
+
+@keyframes walk-left{
+  from{
+    transform: translate(0, -25%);
+  }
+
+  to{
+    transform: translate(-100%, -25%);
+  }
+}
+
+.walk-left:hover img,
+.walk-left:focus-visible img {
+  animation: 0.5s steps(8) infinite walk-left ;
+}
+
+.walk-left:active img {
+  animation: 0.3s steps(8) infinite walk-left;
+}
+
+@keyframes walk-right{
+  from{
+    transform: translate(0, -50%);
+  }
+
+  to{
+    transform: translate(-100%, -50%);
+  }
+}
+
+.walk-right:hover img, 
+.walk-right:focus-visible img{
+  animation: 0.5s steps(8) infinite walk-right;
+}
+
+.walk-right:active img {
+  animation: 0.3s steps(8) infinite walk-right;
+}
+
+@keyframes walk-up{
+  from{
+    transform: translate(0, -75%);
+  }
+
+  to{
+    transform: translate(-100%, -75%);
+  }
+}
+
+.walk-up:hover img, 
+.walk-up:focus-visible img{
+  animation: 0.5s steps(8) infinite walk-up;
+}
+
+.walk-up:active img {
+  animation: 0.3s steps(8) infinite walk-up;
+}
+
+.robot-window .robot-sheet{
+  animation-duration: 0.8s;
+  animation-timing-function: steps(8);
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.coin-window img{
+  animation: 0.8s steps(8) infinite spin;
 }
 
 * {
@@ -51,32 +147,15 @@ body {
 
 /* ---------- Lab 1: The Film Strip ---------- */
 /* YOUR CODE: Lab 1, the window and the spin */
+
 .coin-window{
   height: 64px;
   width: 64px;
-  border: 1px red dashed;
-  overflow: hidden;
-}
-.coin-window img{
-  transform: translateX(-87.5%);
+  /* border: 1px red dashed; */
+  overflow: hidden; 
 }
 
-@keyframes spin {
-  from {
-    transform: translateX(0%)
-  }
-  to {
-    transform: translateX(-100%)
-  }
-}
-
-.coin-sheet{
-  animation: 0.000001s steps(8) infinite alternate spin;
-}
-
-
-
-
+.coin-window img{transform: translateX(-50%);}
 
 /* ---------- Lab 2: Byte Walks ---------- */
 .robot-row {
@@ -84,7 +163,6 @@ body {
   flex-wrap: wrap;
   gap: var(--space);
 }
-
 
 /* Each window is a button, so the keyboard can reach it */
 .robot-window {
@@ -96,26 +174,60 @@ body {
 }
 
 /* YOUR CODE: Lab 2, the windows and four directions */
-.robot-window{
-  overflow: hidden;
-  height: 128px;
-  width: 128px;
-}
-.robot-window:focus-visible{
-  outline: 5px solid var(--triadic-color);
-  border-radius: 20px;
-}
 
+.robot-window, .robot-window:focus-visible{
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+}
 
 /* ---------- Lab 3: The Stage ---------- */
+
 .stage {
+  position: relative;
   height: 160px;
   padding-top: var(--space-small);
   border-radius: var(--radius);
   background: linear-gradient(var(--secondary-color) 78%, var(--primary-color) 78%);
+  overflow: hidden;
 }
 
 /* YOUR CODE: Lab 3, a window on the stage, then walk across */
 
+@keyframes cross {
+  from {
+    left: -128px;
+  }
+
+  to {
+    left: 100%;
+  }
+}
+
+.walker {
+  position: absolute;
+  top: 8px;
+  left: -128px;
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+  animation: cross 6s linear infinite;
+}
+
+.stage-window {
+  width: 128px;
+  height: 128px;
+  overflow: hidden;
+}
+
+.stage-window .robot-sheet {
+  display: block;
+  animation: 0.8s steps(8) infinite walk-right;
+}
 
 /* YOUR CODE: Be kind to motion (at the very bottom) */
+
+.stage:hover .walker,
+.stage:hover .robot-sheet {
+  animation-play-state: paused;
+}
