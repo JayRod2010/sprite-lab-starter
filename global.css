@@ -51,6 +51,31 @@ body {
 
 /* ---------- Lab 1: The Film Strip ---------- */
 /* YOUR CODE: Lab 1, the window and the spin */
+.coin-window{
+  height: 64px;
+  width: 64px;
+  border: 1px red dashed;
+  overflow: hidden;
+}
+.coin-window img{
+  transform: translateX(-87.5%);
+}
+
+@keyframes spin {
+  from {
+    transform: translateX(0%)
+  }
+  to {
+    transform: translateX(-100%)
+  }
+}
+
+.coin-sheet{
+  animation: 0.000001s steps(8) infinite alternate spin;
+}
+
+
+
 
 
 /* ---------- Lab 2: Byte Walks ---------- */
@@ -59,6 +84,7 @@ body {
   flex-wrap: wrap;
   gap: var(--space);
 }
+
 
 /* Each window is a button, so the keyboard can reach it */
 .robot-window {
@@ -70,6 +96,15 @@ body {
 }
 
 /* YOUR CODE: Lab 2, the windows and four directions */
+.robot-window{
+  overflow: hidden;
+  height: 128px;
+  width: 128px;
+}
+.robot-window:focus-visible{
+  outline: 5px solid var(--triadic-color);
+  border-radius: 20px;
+}
 
 
 /* ---------- Lab 3: The Stage ---------- */
